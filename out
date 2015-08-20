@@ -1,0 +1,1000 @@
+   14  jobs
+   15  fg %2
+   16  cmsRun LT-MC.py 
+   17  fg
+   18  cmsRun LT-MC.py 
+   19  fg
+   20  cmsRun LT-MC.py 
+   21  fg
+   22  cmsRun LT-MC.py 
+   23  root -l analysis.root 
+   24  cmsRun LT-MC.py 
+   25  emacs LT-MC.py -nw
+   26  nohup cmsRun LT-MC.py >out &
+   27  more ~/.bashrc
+   28  tauID
+   29  ls
+   30  emacs  ../plugins/AODeffi.cc -nw
+   31  ls
+   32  emacs effiHCALStudy.py -nw
+   33  cd /cms/ojalvo/stage1Emulator/CMSSW_7_4_4/src/
+   34  cmsenv
+   35  ls
+   36  cd L1Trigger/L1TNtuplizer/test/
+   37  ls
+   38  emacs ../plugins/L1TNtuplizer.cc -nw
+   39  clear
+   40  cd /cms/ojalvo/SMHTT_2015/laura/CMSSW_7_4_6_patch6/src/UWAnalysis/
+   41  cd RecoTools/plugins/
+   42  ls
+   43  more EventSummary.
+   44  more EventSummary.h 
+   45  cd ../../NtupleTools/plugins/
+   46  ls
+   47  emacs EventWeightFiller.h -n
+   48  emacs EventTreeMaker.h -nw
+   49  emacs ../../Configuration/python/tools/ntupleToolsMiniAod.py
+   50  history
+   51  cd -
+   52  emacs EventWeightFiller.h -nw
+   53  emacs EventTreeMaker.h -nw
+   54  cd ./../
+   55  cd -
+   56  cd ../../
+   57  scram b -j 5
+   58  cd /cms/ojalvo/SMHTT_2015/laura/CMSSW_7_4_6_patch6/src/UWAnalysis
+   59  cmsenv
+   60  emacs NtupleTools/plugins/EventTreeMaker.h -nw
+   61  scram b -j 5
+   62  cd /cms/ojalvo/stage1Emulator/CMSSW_7_4_4/src/L1Trigger/L1TNtuplizer/
+   63  emacs plugins/L1TNtuplizer.cc -nw
+   64  scram b -j 5
+   65  fg
+   66  scram b -j 5
+   67  fg
+   68  scram b -j 5
+   69  fg
+   70  scram b -j 5
+   71  fg
+   72  scram b -j 5
+   73   gh
+   74  fg
+   75  scram b -j 5
+   76  fg
+   77  scram b -j 5
+   78  fg
+   79  scram b -j 5
+   80  fg
+   81  scram b -j 5
+   82  fg
+   83  scram b -j 5
+   84  fg
+   85  scram b -j 5
+   86  fg
+   87  scram b -j 5
+   88  fg
+   89  scram b -j 5
+   90  fg
+   91  scram b -j 5
+   92  fg
+   93  scram b -j 5
+   94  fg
+   95  scram b -j 5
+   96  fg
+   97  scram b -j 5
+   98  fg
+   99  scram b -j 5
+  100  fg
+  101  scram b -j 5
+  102  fg
+  103  scram b -j 5
+  104  fg
+  105  scram b -j 5
+  106  fg
+  107  scram b -j 5
+  108  fg
+  109  scram b -j 5
+  110  fg
+  111  scram b -j 5
+  112  cd test/
+  113  emacs ../python/l1NtupleProducer_cfi.py -nw
+  114  klseamcs
+  115  ls
+  116  emacs out -nw
+  117  ls
+  118  emacs edmDumpEventContentGGHtt.out -nw
+  119  fg
+  120  jobs
+  121  ls
+  122  emacs edmDumpEventContentGGHtt.out -nw
+  123  fg
+  124  ls
+  125  emacs Stage1Data.py -nw
+  126  kfgcmsRun i
+  127  fg
+  128  emacs Stage1DataA.py -nw
+  129  cmsRun Stage1DataA.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/MINIAOD/PromptReco-v1/000/251/252/00000/7E4A8F57-A127-E511-9BF5-02163E014629.root"
+  130  cmsenv
+  131  cmsRun Stage1DataA.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/MINIAOD/PromptReco-v1/000/251/252/00000/7E4A8F57-A127-E511-9BF5-02163E014629.root"
+  132  ls
+  133  fg
+  134  root -l NtupilizeEmulatorEffiModifyParams.root
+  135  fg
+  136  jobs
+  137  fg %1
+  138  edmDumpEventContent root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/MINIAOD/PromptReco-v1/000/251/252/00000/7E4A8F57-A127-E511-9BF5-02163E014629.root >out
+  139  emacs out inw
+  140  fg
+  141  edmDumpEventContent root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/252/00000/7E4A8F57-A127-E511-9BF5-02163E014629.root >out
+  142  df
+  143  fg
+  144  jobs
+  145  edmDumpEventContent /hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root >out
+  146  emacs out -nw
+  147  fg
+  148  ls
+  149  more secondaryFileHack.py 
+  150  more SingleMuon.txt 
+  151  ls --help
+  152  ls -R /hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/*/*/*
+  153  ls -d /hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/*/*/*
+  154  ls -d /hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/*/*/*/*
+  155  ls -d /hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/*/*/*/* >SingleMuonRECO.txt 
+  156  more secondaryFileHack.py SingleMuonRECO.txt >outSecondaryFilesSingleMuonReco.out
+  157  more secondaryFileHack.py SingleMuonRECO.txt 
+  158  python secondaryFileHack.py SingleMuonRECO.txt >outSecondaryFilesSingleMuonReco.out
+  159  cd /cms/ojalvo/stage1Emulator/CMSSW_7_4_4/src/L1Trigger/L1TNtuplizer/test
+  160  cmsenv
+  161  emacs outSecondaryFilesSingleMuonReco.out -nw
+  162  fg
+  163  emacs Stage1DataA.py -nw
+  164  emacs ../python/outputSecondaryFileMapData_cfi.py -nw
+  165  emacs ../python/outputSecondaryFileMapDataRECO_cfi.py -nw
+  166  fg
+  167  cp outSecondaryFilesSingleMuonReco.out ../python/outputSecondaryFileMapDataRECO_cfi.py 
+  168  fg
+  169  emacs Stage1DataA.py -nw
+  170  history
+  171  fg
+  172  more outSecondaryFilesSingleMuonReco.out 
+  173  cmsenv
+  174  cmsRun Stage1DataRECO.py inputFiles="/hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/168/00000/806E3B1D-C926-E511-BBB7-02163E0136D9.root"
+  175  fg
+  176  cd ../python/
+  177  ls
+  178  fg
+  179  cmsRun Stage1DataRECO.py inputFiles="/hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/168/00000/806E3B1D-C926-E511-BBB7-02163E0136D9.root"
+  180  cd -
+  181  cmsRun Stage1DataRECO.py inputFiles="/hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/168/00000/806E3B1D-C926-E511-BBB7-02163E0136D9.root"
+  182  more outSecondaryFilesSingleMuonReco.out 
+  183  emacs ../python/outputSecondaryFileMapDataRECO_cfi.py
+  184  fg
+  185  emacs ../python/outputSecondaryFileMapDataRECO_cfi.py -nw
+  186  fg
+  187  emacs ../python/outputSecondaryFileMapDataRECO_cfi.py
+  188  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/499/00000/2E0BA026-1329-E511-9701-02163E012603.root"
+  189  emacs Stage1DataRECO.py -nw
+  190  root -l NtupilizeEmulatorEffiModifyParams.root
+  191  emacs ../plugins/L1TNtuplizer.cc -nw
+  192  cd ../
+  193  scram b -j 5
+  194  cd -
+  195  emacs Stage1DataRECO.py -nw
+  196  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/499/00000/2E0BA026-1329-E511-9701-02163E012603.root"
+  197  root -l L1TreeReco.root 
+  198  fg
+  199  cd ../
+  200  scram b -j 5
+  201  fg
+  202  scram b -j 5
+  203  df
+  204  fg
+  205  scram b -j 5
+  206  cd -
+  207  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/499/00000/2E0BA026-1329-E511-9701-02163E012603.root"
+  208  emacs Stage1DataRECO.py -nw
+  209  ls
+  210  emacs Stage1DataRECO.py -nw
+  211  emacs ../../../L1Trigger/L1TCalorimeter/data/tauIsoLutTest0.15Iso.txt
+  212  fg
+  213  lsfg
+  214  fg
+  215  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/499/00000/2E0BA026-1329-E511-9701-02163E012603.root"
+  216  fg
+  217  clear
+  218  plotting
+  219  mkdir SYNC
+  220  cd SYNC/
+  221  cmsenv
+  222  cd /cm
+  223  mkdir /nfs_scratch/ojalvo/SYNC
+  224  cd /nfs_scratch/ojalvo/SYNC/
+  225  cp /nfs_scratch/laura/syncNtuple4.root .; cp /afs/cern.ch/user/s/steggema/public/Sync2015/mt/SUSYGluGluToHToTauTau_M-160_spring15_2807.root SUSYGluGluToHToTauTau_M-160_spring15_2807_JAN.root 
+  226  root -l syncNtuple4.root 
+  227  fg
+  228  ls
+  229  root -l SUSYGluGluToHToTauTau_M-160_spring15_2807_JAN.root
+  230  edmCopyPickMerge --help
+  231  edmPickEvents.py -nw
+  232  edmPickEvents.py --help
+  233  cd -
+  234  analysis
+  235  cd -
+  236  root -l SUSYGluGluToHToTauTau_M-160_spring15_2807_JAN.root
+  237  cd /cms/ojalvo/mssm8TeV/CMSSW_5_3_7/src/UWAnalysis/CRAB/LTau/
+  238  ls
+  239  rm *~
+  240  ls
+  241  rm log*
+  242  ls 
+  243  cd Sync/
+  244  ls
+  245  cd ../
+  246  cp -r Sync/ /cms/ojalvo/SMHTT_2015/CMSSW_7_4_6_patch6/src/UWAnalysis/CRAB/ZTT/.
+  247  analysis
+  248  cd Sync/
+  249  ls
+  250  emacs compareSync.C -nw
+  251  ls
+  252  emacs eventList.py -nw
+  253  ls
+  254  rm *~
+  255  cd ../
+  256  cd -
+  257  more README 
+  258  emacs SyncTreeMaker.C -nw
+  259  more README 
+  260  ls
+  261  cmsenv
+  262  ls /nfs_scratch/laura/
+  263  mkdir roudn1
+  264  rm roudn1/
+  265  rm roudn1/ -r
+  266  rm round1/
+  267  mkdir round1/
+  268  clear
+  269  pwd
+  270  ls
+  271  more compareSync.C 
+  272  ls
+  273  clear
+  274  cd /cms/ojalvo/stage1Emulator/CMSSW_7_4_4/src/L1Trigger/L1TNtuplizer/test
+  275  cmsenv
+  276  ls
+  277  emacs ../plugins/L1TNtuplizer.cc -nw
+  278  cd ../
+  279  cmsenv
+  280  scram b -j 5
+  281  cd test/
+  282  cmsRun Stage1DataRECO.py
+  283  cmsenv
+  284  cmsRun Stage1DataRECO.py
+  285  history
+  286  emacs ../python/outputSecondaryFileMapDataRECO_cfi.py
+  287  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/168/00000/F6D93E06-C426-E511-B747-02163E013476.root"
+  288  fg
+  289  jobs
+  290  fg
+  291  cd ../
+  292  scram b -j 5
+  293  cd -
+  294  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/168/00000/F6D93E06-C426-E511-B747-02163E013476.root"
+  295  jobs
+  296  fg
+  297  root -l L1TreeReco.root 
+  298  fg
+  299  root -l L1TreeReco.root 
+  300  ls
+  301  emacs ../python/outputSecondaryFileMapDataRECO_cfi.py -nw
+  302  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/8844EBD3-7927-E511-9207-02163E014188.root"
+  303  root -l L1TreeReco.root 
+  304  fg
+  305  cd ../
+  306  scram b -j 5
+  307  fg
+  308  scram b -j 5
+  309  fg
+  310  scram b -j 5
+  311  fg
+  312  scram b -j 5
+  313  fg
+  314  scram b -j 5
+  315  fg
+  316  scram b -j 5
+  317  fg
+  318  scram b -j 5
+  319  fg
+  320  scram b -j 5
+  321  fg
+  322  scram b -j 5
+  323  fg
+  324  scram b -j 5
+  325  fg
+  326  scram b -j 5
+  327  fg
+  328  scram b -j 5
+  329  fg
+  330  scram b -j 5
+  331  fg
+  332  scram b -j 5
+  333  fg
+  334  scram b -j 5
+  335  fg
+  336  scram b -j 5
+  337  fg
+  338  cd -
+  339  history
+  340  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/8844EBD3-7927-E511-9207-02163E014188.root"
+  341  df
+  342  fg
+  343  cd ../
+  344  scram b -j 5
+  345  cd -
+  346  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/8844EBD3-7927-E511-9207-02163E014188.root"
+  347  fg
+  348  cd ../
+  349  scram b -j 5
+  350  fg
+  351  scram b -j 5
+  352  cd -
+  353  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/8844EBD3-7927-E511-9207-02163E014188.root"
+  354  fg
+  355  cd -
+  356  scram b -j 5
+  357  cd -
+  358  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/8844EBD3-7927-E511-9207-02163E014188.root"
+  359  cd /cms/ojalvo/stage1Emulator/CMSSW_7_4_4/src/L1Trigger/L1TNtuplizer/test
+  360  cmsenv
+  361  emacs ../plugins/L1TNtuplizer.cc -nw
+  362  cd ../
+  363  scram b -j 5
+  364  cd -
+  365  history
+  366  cmsRun Stage1DataRECO.py inputFiles="/hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  367  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  368  fg
+  369  cd -
+  370  scram b -j 5
+  371  cd -
+  372  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  373  fg
+  374  cd -
+  375  scram b -j 5
+  376  cd -
+  377  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  378  fg
+  379  cd -
+  380  scram b -j 5
+  381  cd -
+  382  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  383  fg
+  384  cd -
+  385  scram b -j 5
+  386  cd -
+  387  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  388  jobs
+  389  tail -f out
+  390  jobs
+  391  fg 
+  392  cd -
+  393  scram b -j 5
+  394  fg
+  395  scram b -j 5
+  396  cd -
+  397  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  398  tail -f out
+  399  emacs out -nw
+  400  fg
+  401  cd -
+  402  scram b -j 5
+  403  cd -
+  404  fg
+  405  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  406  tail -f out
+  407  fg
+  408  cd -
+  409  scram b -j 5
+  410  cd -
+  411  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  412  tail -f out
+  413  fg
+  414  cd -
+  415  scram b -j 5
+  416  fg
+  417  cd -
+  418  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  419  tail -f out
+  420  fg
+  421  emcacs out -nw
+  422  emacs out -nw
+  423  fg
+  424  cd ../
+  425  scram b -j 5
+  426  fg
+  427  scram b -j 5
+  428  fg
+  429  scram b -j 5
+  430  fg
+  431  scram b -n 5
+  432  scram b -j 5
+  433  fg
+  434  scram b -j 5
+  435  cd -
+  436  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  437  tail -f out
+  438  emacs out -nw
+  439  jobs
+  440  kill %2
+  441  tail -n 100 out
+  442  emacs out -nw
+  443  fg
+  444  cd -
+  445  scram b -j 5
+  446  cd -
+  447  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  448  tail -f out
+  449  emacs out
+  450  fg
+  451  cd -
+  452  scram b -j 5
+  453  cd -
+  454  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  455  tail -f out
+  456  tail -n 100 out
+  457  emacs out -nw
+  458  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out1 &
+  459  tail -n 10 out1
+  460  tail -n 100 out1
+  461  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out2 &
+  462  tail -n 100 out2
+  463  fg
+  464  cd -
+  465  scram b -j 5
+  466  cd -
+  467  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out3 &
+  468  tail -f out3 
+  469  tail -n 100 out3 
+  470  fg
+  471  cd -
+  472  scram b -j 5
+  473  cd -
+  474  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out3 &
+  475  fg
+  476  jobs
+  477  kill %2
+  478  jobs
+  479  tail -n 100 out3 
+  480  fg
+  481  cd -
+  482  scram b -j 5
+  483  fg
+  484  scram b -j 5
+  485  cd -
+  486  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out4 &
+  487  tail -f out4 
+  488  fg
+  489  jobs
+  490  kill %3
+  491  kill %4
+  492  emacs out4 -nw
+  493  fg
+  494  cd -
+  495  scram b -j 5
+  496  cd -
+  497  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out4 &
+  498  tail -f out4 
+  499  jobs
+  500  kill %2
+  501  fg
+  502  cd 
+  503  cd -
+  504  cd ../
+  505  scram b -j 5
+  506  fg
+  507  scram b -j 5
+  508  fg
+  509  scram b -j 5
+  510  cd -
+  511  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out4 &
+  512  jobs
+  513  emacs out 4
+  514  fg
+  515  jobs
+  516  emacs out4 -nw
+  517  fg
+  518  cd -
+  519  scram b -j 5
+  520  cd -
+  521  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out4 &
+  522  jobs
+  523  kill %2
+  524  jobs
+  525  tail -f 100 out4
+  526  fg
+  527  cd ../
+  528  scram b -j 5
+  529  cd -
+  530  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  531  jobs
+  532  kill %3
+  533  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  534  fg
+  535  cd -
+  536  scram b -j 5
+  537  cd -
+  538  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  539  fg
+  540  cd -
+  541  scram b -j 5
+  542  cd -
+  543  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  544  fg
+  545  cd -
+  546  scram b -j 5
+  547  cd -
+  548  nohu cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  549  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  550  jobs
+  551  tail -f out
+  552  jobs
+  553  kill %2
+  554  emacs out -nw
+  555  fg
+  556  cd -
+  557  scram b -j 5
+  558  cd -
+  559  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  560  jobs
+  561  kill %2
+  562  emacs out -nw
+  563  fg
+  564  cd ../
+  565  scram b -j 5
+  566  fg
+  567  scram b -j 5
+  568  fg
+  569  scram b -j 5
+  570  fg
+  571  scram b -j 5
+  572  cd -
+  573  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  574  tail -f out
+  575  jobs
+  576  kill %2
+  577  emacs out -nw
+  578  jobs
+  579  fg %1
+  580  jobs
+  581  fg %3
+  582  fg
+  583  cd -
+  584  scram b -j 5
+  585  cd -
+  586  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  587  tail -f out
+  588  jobs
+  589  kill %2
+  590  emacs out -nw
+  591  fg
+  592  cd /cms/ojalvo/SMHTT_2015/CMSSW_7_4_6_patch6/src/UWAnalysis/CRAB/ZTT/Sync
+  593  cmsenv
+  594  condor_q laura
+  595  condor_q ldodd
+  596  ls -l /nfs_scratch/laura/
+  597  clear
+  598  ls
+  599  ls -l /nfs_scratch/laura/
+  600  ls -l /scratch/laura/
+  601  ls -l /scratch/laura/syncNtupleMu1-SUB-MU
+  602  ls -l /scratch/laura/
+  603  ls -l /nfs_scratch/laura/syncNtupleMu1-SUB-MU
+  604  ls -l /hdfs/store/user/laura/syncNtupleMu*
+  605  analysis
+  606  cd ../../
+  607  clear
+  608  emacs Configuration/python/tools/ntupleToolsMiniAod.py -nw
+  609  cd ../../
+  610  grep "must not be negative" * -rl
+  611  emacs src/UWAnalysis/RecoTools/interface/CompositePtrCandidateT1T2MEtAlgorithm.h
+  612  history
+  613  ps
+  614  jobs
+  615  ps -ef
+  616  ps -ef | grep ojalvo
+  617  kill -9 11248
+  618  ps -ef | grep ojalvo
+  619  kill -9 11458
+  620  ps -ef | grep ojalvo
+  621  kill -9 12398
+  622  kill -9 12447
+  623  kill -9 12459
+  624  cd /cms/ojalvo/stage1Emulator/CMSSW_7_4_4/src/L1Trigger/L1TNtuplizer/
+  625  cmsenv
+  626  ls
+  627  cmsenv
+  628  emacs plugins/L1TNtuplizer.cc -nw
+  629  scram b -j 5
+  630  cd -
+  631  cd test/
+  632  ls
+  633  emacs Stage1DataRECO.py -nw
+  634  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  635  emacs out -nw
+  636  cd ../
+  637  scram b -j 5
+  638  cd -
+  639  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  640  tail -f out
+  641  emacs out -nw
+  642  cd ../
+  643  scram b -j 5
+  644  cd test/
+  645  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  646  df
+  647  fg
+  648  emacs out -nw
+  649  cd ../
+  650  scram b -j 5
+  651  cd -
+  652  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  653  ls
+  654  fg
+  655  tail -f out
+  656  fg
+  657  cd ../
+  658  scram b -j 5
+  659  cd -
+  660  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  661  tail -f out
+  662  fg
+  663  cd -
+  664  scram b -j 5
+  665  cd -
+  666  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  667  tail -f out
+  668  df
+  669  fg
+  670  cd -
+  671  scram b -j 5
+  672  cd -
+  673  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  674  tail -f out
+  675  fg
+  676  cd ../
+  677  scram b -j 5
+  678  cd -
+  679  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  680  fg
+  681  cd ../
+  682  scram b -j 5
+  683  cd -
+  684  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  685  tail -f out
+  686  fg
+  687  cd ../
+  688  scram b -j 5
+  689  cd -
+  690  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  691  fg
+  692  cd ../
+  693  scram b -j 5
+  694  cd -
+  695  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  696  fg
+  697  ls
+  698  jobs
+  699  fg %2
+  700  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  701  fg
+  702  cd ../
+  703  scram b -j 5
+  704  cd -
+  705  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  706  fg
+  707  cd ../
+  708  scram b -j 5
+  709  cd -
+  710  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  711  fg
+  712  jobs
+  713  fg
+  714  jobs
+  715  fg %4
+  716  emacs ../plugins/L1TNtuplizer.cc -nw
+  717  cd ../
+  718  scram b -j 5
+  719  cd -
+  720  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  721  ls
+  722  fg
+  723  jobs
+  724  fg %8
+  725  jobs
+  726  fg %7
+  727  jobs
+  728  ls
+  729  edmDumpEventContent /hdfs/store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root  >RecoEDMOutput
+  730  emacs RecoEDMOutput -nw
+  731  fg
+  732  jobs
+  733  fg %8
+  734  cd ../
+  735  scram b -j 5
+  736  fg
+  737  scram b -j 5
+  738  cd -
+  739  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out1 &
+  740  fg
+  741  jobs
+  742  fg %7
+  743  jobs
+  744  fg
+  745  cd ../
+  746  scram b -j 5
+  747  cd -
+  748  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" 
+  749  fg
+  750  cd -
+  751  scram b -j 5
+  752  cd -
+  753  ls
+  754  emacs Stage1DataRECO.py -nw
+  755  cmsRun Stage1DataRECO.py
+  756  fg
+  757  emacs Stage1DataRECO.py -nw
+  758  cmsRun Stage1DataRECO.py
+  759  fg
+  760  cmsRun Stage1DataRECO.py
+  761  diff Stage1DataRECO.py Stage1DataA.py
+  762  fg
+  763  diff Stage1DataRECO.py Stage1DataA.py
+  764  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out1 &
+  765  jobs
+  766  kill %3
+  767  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" 
+  768  kill %4
+  769  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" 
+  770  root -l L1TreeReco.root 
+  771  fg
+  772  root -l L1TreeReco.root 
+  773  fg
+  774  root -l L1TreeReco.root 
+  775  fg
+  776  cd ../
+  777  scram b -j 5
+  778  cd -
+  779  root -l L1TreeReco.root 
+  780  cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" 
+  781  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out
+  782  jobs
+  783  fg
+  784  emacs Stage1DataRECO.py -nw
+  785  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out
+  786  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out &
+  787  jobs
+  788  emacs out -nw
+  789  fg
+  790  jobs
+  791  fg %2
+  792  jobs
+  793  fg %1
+  794  jobs
+  795  fg %3
+  796  jobs
+  797  fg %1
+  798  cd ../
+  799  scram b -j 5
+  800  cd -
+  801  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out1 &
+  802  '
+  803  '
+  804  jobs
+  805  fg
+  806  jobs
+  807  fg %3
+  808  jobs
+  809  ls -l out*
+  810  fg
+  811  jobs
+  812  fg %1
+  813  cd ../
+  814  scram b -j 5
+  815  fg
+  816  jobs
+  817  fg %3
+  818  jobs
+  819  fg %1
+  820  cd -
+  821  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out2 &
+  822  jobs
+  823  fg
+  824  jobs
+  825  fg %3
+  826  jobs
+  827  fg %2
+  828  fg %1
+  829  jobs
+  830  fg %3
+  831  cd ../
+  832  scram b -j 5
+  833  cd -
+  834  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out2 &
+  835  jobs
+  836  fg
+  837  jobs
+  838  fg %1
+  839  jobs
+  840  fg %3
+  841  jobs
+  842  cd ../
+  843  cmsenv
+  844  fg
+  845  jobs
+  846  fg %1
+  847  scram b -j 5
+  848  cd -
+  849  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out2 &
+  850  fg
+  851  jobs
+  852  fg %3
+  853  jobs
+  854  fg %1
+  855  jobs
+  856  fg %3
+  857  emacs out2 -nw
+  858  jobs
+  859  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out2 &
+  860  emacs out2 -nw
+  861  tail -f out2 
+  862  emacs out2 -nw
+  863  jobs
+  864  fg %1
+  865  cd ../
+  866  scram b -j 5
+  867  cd -
+  868  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out2 &
+  869  emacs out2 -nw
+  870  jobs
+  871  fg %1
+  872  cd -
+  873  scram b -j 5
+  874  cd -
+  875  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out3 &
+  876  fg
+  877  jobs
+  878  fg %3
+  879  jobs
+  880  fg %1
+  881  d ../
+  882  cd ../
+  883  scram b -j 5
+  884  cd -
+  885  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out3 &
+  886  fg
+  887  jobs
+  888  fg %3
+  889  jobs
+  890  fg %1
+  891  cd ../
+  892  scram b -j 5
+  893  jobs
+  894  cd -
+  895  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out4 &
+  896  tail -f out4
+  897  jobs
+  898  fg %3
+  899  jobs
+  900  fg %1
+  901  cd ../
+  902  scram b -j 5
+  903  fg
+  904  scram b -j 5
+  905  cd -
+  906  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out5 &
+  907  tail -f out5
+  908  job
+  909  jobs
+  910  fg %3
+  911  jobs
+  912  fg %1
+  913  cd -
+  914  scram b -j 5
+  915  cd -
+  916  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out6 &
+  917  jobs
+  918  fg
+  919  jobs
+  920  fg %3
+  921  jobs
+  922  tail -f out6
+  923  jobs
+  924  fg %1
+  925  cd -
+  926  scram b -j 5
+  927  cd -
+  928  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root" >out6 &
+  929  jobs
+  930  fg %3
+  931  jobs
+  932  fg %1
+  933  jobs
+  934  fg %3
+  935  fg
+  936  cd ../
+  937  scram b -j 5
+  938  cd -
+  939  nohup cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  940  kill %6
+  941  fg
+  942  jobs
+  943   cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  944  fg
+  945  jobs
+  946  fg %1
+  947  cd -
+  948  scram b -j 5
+  949  cd -
+  950   cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  951  fg
+  952  cd ../
+  953  scram b -j 5
+  954  fg
+  955  scram b -j 5
+  956  cd -
+  957   cmsRun Stage1DataRECO.py inputFiles="root://cmsxrootd.hep.wisc.edu//store/data/Run2015B/SingleMuon/RECO/PromptReco-v1/000/251/251/00000/02E39830-8427-E511-BBF5-02163E01186A.root"
+  958  fg
+  959  cd ../
+  960  scram b -j 5
+  961  cd -
+  962  ls -ls submit*
+  963  emacs submitData.sh -nw
+  964  fg
+  965  more SingleMuon.txt 
+  966  fg
+  967  more SingleMuonRECO.txt 
+  968  fg
+  969  more SingleMuonRECO.txt 
+  970  fg
+  971  more SingleMuon.txt 
+  972  more SingleMuonRECO.txt 
+  973  fg
+  974  ls /nfs_scratch/ojalvo/
+  975  fg
+  976  emacs /nfs_scratch/ojalvo/tau-Stage1-SingleMuon-SUBStage1/SUBStage1-0438FA5A-A127-E511-BA6F-02163E013414/SUBStage1-0438FA5A-A127-E511-BA6F-02163E013414.py 
+  977  emacs /nfs_scratch/ojalvo/tau-Stage1-SingleMuon-SUBStage1/SUBStage1-0438FA5A-A127-E511-BA6F-02163E013414/SUBStage1-0438FA5A-A127-E511-BA6F-02163E013414.out -nw
+  978  emacs /nfs_scratch/ojalvo/tau-Stage1-SingleMuon-SUBStage1/SUBStage1-0438FA5A-A127-E511-BA6F-02163E013414/SUBStage1-0438FA5A-A127-E511-BA6F-02163E013414.err -nw
+  979  fg
+  980  gridprox
+  981  nohup bash submitData.sh  >logSubmit &
+  982  emacs submitData.sh -nw
+  983  nohup bash submitData.sh  >logSubmit &
+  984  tail -f logSubmit 
+  985   cd /cms/ojalvo/stage1Emulator/CMSSW_7_4_4/src/L1Trigger/L1TNtuplizer/test
+  986  cmsenv
+  987  condor_q ojalvo
+  988  emacs /nfs_scratch/ojalvo/tau-Stage1-SingleMuonRECO-SUBStage1/SUBStage1-A02BB937-8C2A-E511-A3AB-02163E0129A3/SUBStage1-A02BB937-8C2A-E511-A3AB-02163E0129A3.py -nw
+  989  emacs /nfs_scratch/ojalvo/tau-Stage1-SingleMuonRECO-SUBStage1/SUBStage1-A02BB937-8C2A-E511-A3AB-02163E0129A3/SUBStage1-A02BB937-8C2A-E511-A3AB-02163E0129A3.err -nw
+  990  rm -rf /nfs_scratch/ojalvo/tau-Stage1-SingleMuonRECO-SUBStage1/
+  991  emacs SingleMuonRECO.txt -nw
+  992  history
+  993  more submitData.sh
+  994  gridprox
+  995  bash submitData.sh
+  996  condor_q ojalvo
+  997  condor_q -run ojalvo
+  998  condor_q -run ojalvo |wc -l
+  999  emacs /nfs_scratch/ojalvo/tau-Stage1-SingleMuonRECO-SUBStage1/SUBStage1-A02BB937-8C2A-E511-A3AB-02163E0129A3/SUBStage1-A02BB937-8C2A-E511-A3AB-02163E0129A3.err -nw
+ 1000  ls /hdfs/store/user/ojalvo/tau-Stage1-SingleMuonRECO-SUBStage1/SUBStage1-* -l
+ 1001  plotting
+ 1002  makePlot
+ 1003  emacs makeTemplatePlotsMuTau.C -nw
+ 1004  analysis
+ 1005  emacs ../../ROOT/bin/EventWeightsIterative.cc -nw
+ 1006  cd -
+ 1007  cd /cms/ojalvo/stage1Emulator/CMSSW_7_4_4/src/L1Trigger/L1TNtuplizer/
+ 1008  cmsenv
+ 1009  fg
+ 1010  cmsenv
+ 1011  emacs test/Stage1DataRECO.py -nw
+ 1012  history
+ 1013  history >out
