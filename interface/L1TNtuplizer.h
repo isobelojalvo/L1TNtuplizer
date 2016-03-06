@@ -37,6 +37,8 @@
 #include "DataFormats/TauReco/interface/PFTau.h"
 #include "DataFormats/TauReco/interface/PFTauDiscriminator.h"
 #include "DataFormats/L1Trigger/interface/L1JetParticle.h"
+#include "DataFormats/PatCandidates/interface/PackedCandidate.h"
+#include "DataFormats/PatCandidates/interface/Tau.h"
 
 #include <memory>
 #include <math.h>
@@ -91,10 +93,10 @@ class L1TNtuplizer : public edm::EDAnalyzer {
   double TPG6x6, TPGH6x6, TPGE6x6;
   double TPG7x7, TPGH7x7, TPGE7x7;
 
-  void getThreeProngInfo(const reco::PFTau & tau, double &maxDeltaR, double &minProngPt, double &midProngPt, double &maxProngPt, int &nCands);
-  void getRawEcalHcalEnergy(const reco::PFCandidatePtr pfCand, double &rawEcal, double &rawHcal, double &ecal, double &hcal);
-  double getPFCandsEt(const std::vector<reco::PFCandidatePtr> pfCands);
-  double getPFCandsEtEtaPhi(edm::Handle<std::vector<reco::PFCandidate> >& pfCands, const reco::PFTau &tau, double dR);
+  void getThreeProngInfo(const pat::Tau & tau, double &maxDeltaR, double &minProngPt, double &midProngPt, double &maxProngPt, int &nCands);
+  void getRawEcalHcalEnergy(const pat::PackedCandidate pfCand, double &rawEcal, double &rawHcal, double &ecal, double &hcal);
+  double getPFCandsEt(const std::vector<pat::PackedCandidate> pfCands);
+  double getPFCandsEtEtaPhi(edm::Handle<std::vector<pat::PackedCandidate> >& pfCands, const pat::Tau &tau, double dR);
   void initializeHCALTPGMap(const edm::Handle<HcalTrigPrimDigiCollection> hcal, const  edm::ESHandle<L1CaloHcalScale> hcalScale, double hTowerETMap[73][57], bool testMode = false);
   void initializeECALTPGMap(edm::Handle<EcalTrigPrimDigiCollection> ecal, double eTowerETMap[73][57], bool testMode = false);
   int get2x2TPGs(const int maxTPGPt_eta,const int maxTPGPt_phi, const double eTowerETMap[73][57], const double hTowerETMap[73][57], double &TPGe2x2_, double &TPGh2x2_ );
@@ -119,14 +121,27 @@ class L1TNtuplizer : public edm::EDAnalyzer {
   int nev_; // Number of events processed
   bool verbose_;
   std::ofstream logFile_;
+  edm::InputTag rctSource_; 
 
-  edm::EDGetTokenT<reco::PFCandidateCollection> pfCandsToken_;  
+  edm::EDGetTokenT<vector<pat::PackedCandidate> > pfCandsToken_;  
   edm::EDGetTokenT<L1CaloRegionCollection> L1RegionCollection;
   edm::EDGetTokenT<L1CaloEmCollection> L1EMCollection_;
   edm::EDGetTokenT<reco::VertexCollection> vertices_;
+  edm::EDGetTokenT<EcalTrigPrimDigiCollection> ecalSrc_; 
+  edm::EDGetTokenT<HcalTrigPrimDigiCollection> hcalSrc_;
+  //edm::EDGetTokenT<double> recoPt_;
+  //edm::EDGetTokenT<std::string> folderName_;
+  edm::EDGetTokenT<reco::VertexCollection> vtxLabel_;
+  edm::EDGetTokenT<reco::PFTauDiscriminator> discriminatorMu_;
+  edm::EDGetTokenT<reco::PFTauDiscriminator> discriminatorIso_;
+  edm::EDGetTokenT<vector<pat::Tau> > tauSrc_;
+  edm::EDGetTokenT<L1GctJetCandCollection> gctIsoTauJetsSource_;
+  edm::EDGetTokenT<L1GctJetCandCollection> gctTauJetsSource_;
+  edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraIsoTauSource_;
+  edm::EDGetTokenT<vector <l1extra::L1JetParticle> > l1ExtraTauSource_;
 
+  /*
   edm::InputTag vtxLabel_;
-  edm::InputTag rctSource_; 
   edm::InputTag src_;
   edm::InputTag l1ExtraTauSource_;
   edm::InputTag l1ExtraIsoTauSource_;
@@ -135,10 +150,14 @@ class L1TNtuplizer : public edm::EDAnalyzer {
   edm::InputTag tauSrc_;
   edm::InputTag discriminatorIso_;
   edm::InputTag discriminatorMu_;
-  edm::InputTag ecalSrc_;
+  //  edm::InputTag ecalSrc_;
   edm::InputTag hcalSrc_;
   std::string folderName_;
   double recoPt_;
+  */
+  std::string folderName_;
+  double recoPt_;
+
 		 
  int TPGEtaRange(int ieta){
    int iEta = 0;
@@ -191,7 +210,7 @@ class L1TNtuplizer : public edm::EDAnalyzer {
       //std::cout<<"inputEta "<<inputEta<< " n "<< n <<" tpgEtaValues[n-1] "<< tpgEtaValues[n-1] << " abs(inputEta)<tpgEtaValues[n-1]"<<std::endl;
       if (std::fabs(inputEta)<tpgEtaValues[n-1]) {
 	//std::cout<<"found to be true"<<std::endl;
-	int tpgEta = n;
+	//int tpgEta = n;
 	//Positive eta is >28
 	//negative eta is 0 to 27
 	if(inputEta>0){

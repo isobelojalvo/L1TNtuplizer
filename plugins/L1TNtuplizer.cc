@@ -2,7 +2,7 @@
  * \file L1TNtuplizer.cc
  *
  * \author I. Ojalvo
- *
+ * Written for miniAOD
  */
 
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
@@ -25,24 +25,33 @@ using std::vector;
 
 L1TNtuplizer::L1TNtuplizer( const ParameterSet & cfg ) :
   rctSource_(cfg.getParameter<edm::InputTag>("rctSource")),
-  pfCandsToken_(consumes<reco::PFCandidateCollection>(cfg.getParameter<edm::InputTag>("pfCands")))
+  //pfCandsToken_(consumes<reco::PFCandidateCollection>(cfg.getParameter<edm::InputTag>("pfCands"))),
+  pfCandsToken_(consumes<vector<pat::PackedCandidate> >(cfg.getParameter<edm::InputTag>("pfCands"))),
+  ecalSrc_(consumes<EcalTrigPrimDigiCollection>(cfg.getParameter<edm::InputTag>("ecalDigis"))),
+  hcalSrc_(consumes<HcalTrigPrimDigiCollection>(cfg.getParameter<edm::InputTag>("hcalDigis"))),
+  //recoPt_(consumes<double>(cfg.getParameter<double>("recoPtCut"))),
+  //folderName_(consumes<std::string>(cfg.getUntrackedParameter<std::string>("folderName"))),
+  vtxLabel_(consumes<reco::VertexCollection>(cfg.getParameter<edm::InputTag>("vertices"))),
+  discriminatorMu_(consumes<reco::PFTauDiscriminator>(cfg.getParameter<edm::InputTag>("recoTauDiscriminatorMu"))),
+  discriminatorIso_(consumes<reco::PFTauDiscriminator>(cfg.getParameter<edm::InputTag>("recoTauDiscriminatorIso"))),
+  tauSrc_(consumes<vector<pat::Tau> >(cfg.getParameter<edm::InputTag>("recoTau"))),
+  gctIsoTauJetsSource_(consumes<L1GctJetCandCollection>(cfg.getParameter<edm::InputTag>("gctIsoTauJetsSource"))),
+  gctTauJetsSource_(consumes<L1GctJetCandCollection>(cfg.getParameter<edm::InputTag>("gctTauJetsSource"))),
+  l1ExtraIsoTauSource_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraIsoTauSource"))),
+  l1ExtraTauSource_(consumes<vector <l1extra::L1JetParticle> >(cfg.getParameter<edm::InputTag>("l1ExtraTauSource")))
   {
-
-  l1ExtraTauSource_    = cfg.getParameter<edm::InputTag>("l1ExtraTauSource");
-  l1ExtraIsoTauSource_ = cfg.getParameter<edm::InputTag>("l1ExtraIsoTauSource");
-  gctTauJetsSource_    = cfg.getParameter<edm::InputTag>("gctTauJetsSource");
-  gctIsoTauJetsSource_ = cfg.getParameter<edm::InputTag>("gctIsoTauJetsSource");
-  tauSrc_              = cfg.getParameter<edm::InputTag>("recoTau");
-  discriminatorIso_    = cfg.getParameter<edm::InputTag>("recoTauDiscriminatorIso");
-  discriminatorMu_     = cfg.getParameter<edm::InputTag>("recoTauDiscriminatorMu");
-  vtxLabel_            = cfg.getParameter<edm::InputTag>("vertices");
-  folderName_          = cfg.getUntrackedParameter<std::string>("folderName");
-  recoPt_              = cfg.getParameter<double>("recoPtCut");
-  ecalSrc_             = cfg.getParameter<edm::InputTag>("ecalDigis");
-  hcalSrc_             = cfg.getParameter<edm::InputTag>("hcalDigis");
-  //caloTowerProducer_   = cfg.getParameter<edm::InputTag>("caloTowerProducer");
-
-  //cout<<"folderName "<<folderNameSrc_<<endl;
+    //l1ExtraTauSource_    = cfg.getParameter<edm::InputTag>("l1ExtraTauSource");
+    //l1ExtraIsoTauSource_ = cfg.getParameter<edm::InputTag>("l1ExtraIsoTauSource");
+    //gctTauJetsSource_    = cfg.getParameter<edm::InputTag>("gctTauJetsSource");
+    //gctIsoTauJetsSource_ = cfg.getParameter<edm::InputTag>("gctIsoTauJetsSource");
+    //tauSrc_              = cfg.getParameter<edm::InputTag>("recoTau");
+    //discriminatorIso_    = cfg.getParameter<edm::InputTag>("recoTauDiscriminatorIso");
+    //discriminatorMu_     = cfg.getParameter<edm::InputTag>("recoTauDiscriminatorMu");
+    //vtxLabel_            = cfg.getParameter<edm::InputTag>("vertices");
+    folderName_          = cfg.getUntrackedParameter<std::string>("folderName");
+    recoPt_              = cfg.getParameter<double>("recoPtCut");
+    //ecalSrc_             = cfg.getParameter<edm::InputTag>("ecalDigis");
+    //hcalSrc_             = cfg.getParameter<edm::InputTag>("hcalDigis");
   //TFileDirectory subDir = tfs_->mkdir( folderName_ );
   //TFileDirectory subSubDir = subDir.mkdir( folderName_ );
 
@@ -53,7 +62,6 @@ L1TNtuplizer::L1TNtuplizer( const ParameterSet & cfg ) :
   efficiencyTree->Branch("nvtx",          &nvtx,         "nvtx/I");
 
   efficiencyTree->Branch("recoPt",    &recoPt,   "recoPt/D");
-
   efficiencyTree->Branch("decayMode", &decayMode,   "decayMode/I");
 
   efficiencyTree->Branch("tauEtaEcalEnt", &tauEtaEcalEnt,"tauEtaEcalEnt/D");
@@ -124,17 +132,17 @@ void L1TNtuplizer::beginJob( const EventSetup & es) {
 void L1TNtuplizer::analyze( const Event& evt, const EventSetup& es )
  {
 
-
+   //std::cout<<"start analyzing"<<std::endl;
   run = evt.id().run();
   lumi = evt.id().luminosityBlock();
   event = evt.id().event();
 
   edm::Handle<reco::VertexCollection> vertices;
-  if(evt.getByLabel(vtxLabel_, vertices)){
-    const reco::Vertex &PV = vertices->front();
+  if(evt.getByToken(vtxLabel_, vertices)){
+    //const reco::Vertex &PV = vertices->front();
     nvtx = vertices->size();
   }
-
+  
   Handle<L1CaloRegionCollection> regions;
 
   edm::Handle<reco::PFTauDiscriminator> discriminatorIso;
@@ -145,24 +153,25 @@ void L1TNtuplizer::analyze( const Event& evt, const EventSetup& es )
 
   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraTaus;
   edm::Handle < vector<l1extra::L1JetParticle> > l1ExtraIsoTaus;
-
+  
   std::vector<reco::PFTauRef> goodTausRef;
-  std::vector<reco::PFTau> goodTaus;
-  edm::Handle<reco::PFCandidateCollection> pfCands;
+  std::vector<pat::Tau> goodTaus;
+  
+  edm::Handle<vector<pat::PackedCandidate> >pfCands;
   edm::Handle<EcalTrigPrimDigiCollection> ecalTPGs;
   edm::Handle<HcalTrigPrimDigiCollection> hcalTPGs;
-
+  
   //edm::SortedCollection<CaloTower,edm::StrictWeakOrdering<CaloTower> > caloTowers;
   //edm::Handle<CaloTowerCollection> towerHandle;
-  //if(!evt.getByLabel(towerProducer_, towerHandle))
+  //if(!evt.getByToken(towerProducer_, towerHandle))
   //std::cout<<"ERROR GETTING THE HCAL TPGS"<<std::endl;
   //const CaloTowerCollection* caloTowers = towerHandle.product();
-  //if(!evt.getByLabel(caloTower_, caloTowers))
+  //if(!evt.getByToken(caloTower_, caloTowers))
 
 
-  if(!evt.getByLabel(ecalSrc_, ecalTPGs))
+  if(!evt.getByToken(ecalSrc_, ecalTPGs))
     std::cout<<"ERROR GETTING THE ECAL TPGS"<<std::endl;
-  if(!evt.getByLabel(hcalSrc_, hcalTPGs))
+  if(!evt.getByToken(hcalSrc_, hcalTPGs))
     std::cout<<"ERROR GETTING THE HCAL TPGS"<<std::endl;
 
   ESHandle<L1CaloHcalScale> hcalScale;
@@ -175,32 +184,35 @@ void L1TNtuplizer::analyze( const Event& evt, const EventSetup& es )
 
   //Make Rates
   // loop over taus
-  Handle<reco::PFTauCollection> taus;
-  if(evt.getByLabel(tauSrc_, taus)){//Begin Getting Reco Taus
+  Handle<vector<pat::Tau> > taus;
+  if(evt.getByToken(tauSrc_, taus)){//Begin Getting Reco Taus
     for ( unsigned iTau = 0; iTau < taus->size(); ++iTau ) {
-      reco::PFTauRef tauCandidate(taus, iTau);
-      reco::PFTau tau = taus->at(iTau);
-      //std::cout<<"good tau pt "<< tauCandidate->pt()<< std::endl;
-      if(evt.getByLabel(discriminatorMu_, discriminatorMu))
-	if(evt.getByLabel(discriminatorIso_, discriminatorIso)){
-	  //std::cout<<"Tau Candidate Discriminator value "<< (*discriminator)[tauCandidate] << " decay mode "<< tau.decayMode()<<std::endl;
-	  if( (*discriminatorIso)[tauCandidate] > 0.5 && tau.decayMode()>-1 && (*discriminatorMu)[tauCandidate] > 0.5 ){
-	    recoTau_pt->Fill( tauCandidate->pt() );
-	    if(tauCandidate->pt() > recoPt_ ) //get rid of the garbage
-	      goodTaus.push_back(tau);
+      //reco::PFTauRef tauCandidate(taus, iTau);
+      pat::Tau tau = taus->at(iTau);
+      //std::cout<<"good tau pt "<< tau.pt()<< std::endl;
+      //if(evt.getByToken(discriminatorMu_, discriminatorMu))
+      //if(evt.getByToken(discriminatorIso_, discriminatorIso)){
+      //  std::cout<<"Tau Candidate Discriminator value "<< (*discriminatorIso)[tauCandidate] << " decay mode "<< tau.decayMode()<<std::endl;
+      ///  if( (*discriminatorIso)[tauCandidate] > 0.5 && tau.decayMode()>-1 && (*discriminatorMu)[tauCandidate] > 0.5 ){
+      if( tau.decayMode()>-1){// && (*discriminatorMu)[tauCandidate] > 0.5 ){
+	recoTau_pt->Fill( tau.pt() );
+	if(tau.pt() > recoPt_ ) //get rid of the garbage
+	  goodTaus.push_back(tau);
+	//}
 	}
-      }
     }
   }//End Getting Reco Taus
+  else
+    std::cout<<"Error getting reco taus"<<std::endl;
 
   //Begin Making Rate Plots
-  if(evt.getByLabel(l1ExtraTauSource_, l1ExtraTaus)){
+  if(evt.getByToken(l1ExtraTauSource_, l1ExtraTaus)){
     for( vector<l1extra::L1JetParticle>::const_iterator rlxTau = l1ExtraTaus->begin(); rlxTau != l1ExtraTaus->end(); rlxTau++ ) {
 	tau_pt->Fill( rlxTau->pt() );
     }
   }
 
-  if(evt.getByLabel(l1ExtraIsoTauSource_ , l1ExtraIsoTaus)){
+  if(evt.getByToken(l1ExtraIsoTauSource_ , l1ExtraIsoTaus)){
     for( vector<l1extra::L1JetParticle>::const_iterator isoTau = l1ExtraIsoTaus->begin();  isoTau != l1ExtraIsoTaus->end();  ++isoTau ) {
 	isoTau_pt->Fill( isoTau->pt() );
     }
@@ -208,7 +220,6 @@ void L1TNtuplizer::analyze( const Event& evt, const EventSetup& es )
   //End Making Rate Plots
 
   bool testMode = false;
-
 
   //If there isn't at least 1 good reco tau don't bother doing all the work
   if(goodTaus.size()>0){
@@ -224,111 +235,116 @@ void L1TNtuplizer::analyze( const Event& evt, const EventSetup& es )
 
     initializeECALTPGMap( ecalTPGs, eTowerETMap, testMode );
     initializeHCALTPGMap( hcalTPGs, hcalScale, hTowerETMap, testMode);
-    
+
     ////Make efficiencies
     for(unsigned int i = 0; i < goodTaus.size(); i++){
       
-      reco::PFTau recoTau = goodTaus.at(i);
+      pat::Tau recoTau = goodTaus.at(i);
       
       tauEtaEcalEnt =-999, tauPhiEcalEnt =-999;
-    decayMode = -999, jetEt = -999, jetEta = -999, jetPhi = -999, rawEcal = 0, rawHcal = 0,  ecal = 0, hcal = 0;
-    TPG2x2 = 0, TPGH2x2 = 0, TPGE2x2 = 0;
-    TPG5x5 = 0, TPGH5x5 = 0, TPGE5x5 = 0;
-    TPG6x6 = 0, TPGH6x6 = 0, TPGE6x6 = 0;
-    TPG7x7 = 0, TPGH7x7 = 0, TPGE7x7 = 0;
+      decayMode = -999, jetEt = -999, jetEta = -999, jetPhi = -999, rawEcal = 0, rawHcal = 0,  ecal = 0, hcal = 0;
+      TPG2x2 = 0, TPGH2x2 = 0, TPGE2x2 = 0;
+      TPG5x5 = 0, TPGH5x5 = 0, TPGE5x5 = 0;
+      TPG6x6 = 0, TPGH6x6 = 0, TPGE6x6 = 0;
+      TPG7x7 = 0, TPGH7x7 = 0, TPGE7x7 = 0;
+      
+      ////Fill Reco Objects
+      recoPt  = recoTau.pt();
+      recoEta = recoTau.eta();
+      recoPhi = recoTau.phi();
+      
+      decayMode = recoTau.decayMode();
 
-    ////Fill Reco Objects
-    recoPt  = recoTau.pt();
-    recoEta = recoTau.eta();
-    recoPhi = recoTau.phi();
-
-    decayMode = recoTau.decayMode();
-    if(decayMode==10){
-      getThreeProngInfo(recoTau, max3ProngDeltaR, minProngPt, midProngPt, maxProngPt, n3ProngCands);
-    }
-
-    getRawEcalHcalEnergy(recoTau.leadPFChargedHadrCand(), rawEcal, rawHcal, ecal, hcal);
-
-    if(recoTau.leadPFChargedHadrCand().isNonnull()){
-      tauEtaEcalEnt = recoTau.leadPFChargedHadrCand()->positionAtECALEntrance().eta();
-      tauPhiEcalEnt = recoTau.leadPFChargedHadrCand()->positionAtECALEntrance().phi();
-    }
-
-    signalCandsEt = getPFCandsEt(recoTau.signalPFCands());
+      /*
+	//fix me I'm broken
+       if(decayMode==10){
+	getThreeProngInfo(recoTau, max3ProngDeltaR, minProngPt, midProngPt, maxProngPt, n3ProngCands);
+	}*/
+      
+      //getRawEcalHcalEnergy(recoTau.leadPFChargedHadrCand(), rawEcal, rawHcal, ecal, hcal);
+      if(recoTau.leadPFChargedHadrCand().isNonnull()){
+	tauEtaEcalEnt = recoTau.leadPFChargedHadrCand()->positionAtECALEntrance().eta();
+	tauPhiEcalEnt = recoTau.leadPFChargedHadrCand()->positionAtECALEntrance().phi();
+      }
+      
+    //signalCandsEt = getPFCandsEt(recoTau.signalPFCands());
     //Cone of 0.4?
-    isoCandsEt    = getPFCandsEt(recoTau.isolationPFCands());
+    //isoCandsEt    = getPFCandsEt(recoTau.isolationPFCands());
     //Cone of 0.2
-    pfCandsEt     = getPFCandsEtEtaPhi(pfCands, recoTau, 0.5);
+    //pfCandsEt     = getPFCandsEtEtaPhi(pfCands, recoTau, 0.5);
     //Jet Seed pt, eta, phi
-    jetEt  = recoTau.jetRef()->pt();
-    jetEta = recoTau.jetRef()->eta();
-    jetPhi = recoTau.jetRef()->phi();
+    /*
+      jetEt  = recoTau.pfJetRef()->pt();
+      jetEta = recoTau.pfJetRef()->eta();
+      jetPhi = recoTau.pfJetRef()->phi();
+    */
     ////Finished Filling Reco Objects
-
+      
     //Fill TPG Objects
     //   Use the ECAL Entrance Info for Eta Phi
-    if(testMode && i == 0 ){
-      recoPhi = 2.92;
-      recoEta = 0.871;
-      recoPt  = 20;
-      std::cout<<"Running Test Mode"<<std::endl;
-    }
-
-    int tauTpgPhi = convertGenPhi(recoPhi);//convertGenPhi(recoPhi);//
-    int tauTpgEta = convertGenEta(recoEta);//convertGenEta(recoEta);//
+      if(testMode && i == 0 ){
+	recoPhi = 2.92;
+	recoEta = 0.871;
+	recoPt  = 20;
+	std::cout<<"Running Test Mode"<<std::endl;
+      }
+      
+      int tauTpgPhi = convertGenPhi(recoPhi);//convertGenPhi(recoPhi);//
+      int tauTpgEta = convertGenEta(recoEta);//convertGenEta(recoEta);//
+      
+      if(tauTpgPhi>0 && tauTpgEta >0){
+	TPG2x2 = get2x2TPGs(tauTpgEta, tauTpgPhi, eTowerETMap, hTowerETMap, TPGE2x2, TPGH2x2);
+	TPG5x5 = get5x5TPGs(tauTpgEta, tauTpgPhi, eTowerETMap, hTowerETMap, TPGE5x5, TPGH5x5);
+	TPG6x6 = get6x6TPGs(tauTpgEta, tauTpgPhi, eTowerETMap, hTowerETMap, TPGE6x6, TPGH6x6);
+	TPG7x7 = get7x7TPGs(tauTpgEta, tauTpgPhi, eTowerETMap, hTowerETMap, TPGE7x7, TPGH7x7);
+      }
+      else
+	std::cout<<"ERROR tauTPGPHI: "<<tauTpgPhi<<" tauTPGETA: "<<tauTpgEta<<std::endl;
     
-    if(tauTpgPhi>0 && tauTpgEta >0){
-      TPG2x2 = get2x2TPGs(tauTpgEta, tauTpgPhi, eTowerETMap, hTowerETMap, TPGE2x2, TPGH2x2);
-      TPG5x5 = get5x5TPGs(tauTpgEta, tauTpgPhi, eTowerETMap, hTowerETMap, TPGE5x5, TPGH5x5);
-      TPG6x6 = get6x6TPGs(tauTpgEta, tauTpgPhi, eTowerETMap, hTowerETMap, TPGE6x6, TPGH6x6);
-      TPG7x7 = get7x7TPGs(tauTpgEta, tauTpgPhi, eTowerETMap, hTowerETMap, TPGE7x7, TPGH7x7);
-    }
-    else
-      std::cout<<"ERROR tauTPGPHI: "<<tauTpgPhi<<" tauTPGETA: "<<tauTpgEta<<std::endl;
-    
-    //std::cout<< "Using recp phi eta: tauRecoEta " << recoEta <<" recoPhi " << recoPhi << "reco Pt "<< recoPt << " tauTPGEta "<< tauTpgEta << " tauTpgPhi "<< tauTpgPhi<< " TPGE5x5 " << TPGE5x5 << " TPGH5x5  "<< TPGH5x5 << " TPG5x5 "<< TPG5x5 << " ecal "<< ecal << " hcal "<< hcal<<std::endl;
-
-    //Fill L1 Objects
-    l1IsoMatched = -1; l1RlxMatched = -1;
-    isoTauPt = 0; isoTauEta = -99; isoTauPhi = -99; 
-    rlxTauPt = 0; rlxTauEta = -99; rlxTauPhi = -99;
-
-    if(evt.getByLabel(l1ExtraIsoTauSource_ , l1ExtraIsoTaus)){
-      for( vector<l1extra::L1JetParticle>::const_iterator isoTau = l1ExtraIsoTaus->begin();  isoTau != l1ExtraIsoTaus->end();  ++isoTau ) {
-	double dR = deltaR( recoTau.p4(), isoTau->p4());
-	//std::cout<<"Pt "<< isoTau->pt() << " Eta "<< isoTau->eta()<< " Phi "<< isoTau->phi()<< " DR "<< dR << endl;
-	if( dR < deltaR_){
-
+      //std::cout<< "Using recp phi eta: tauRecoEta " << recoEta <<" recoPhi " << recoPhi << "reco Pt "<< recoPt << " tauTPGEta "<< tauTpgEta << " tauTpgPhi "<< tauTpgPhi<< " TPGE5x5 " << TPGE5x5 << " TPGH5x5  "<< TPGH5x5 << " TPG5x5 "<< TPG5x5 << " ecal "<< ecal << " hcal "<< hcal<<std::endl;
+      
+      //Fill L1 Objects
+      l1IsoMatched = -1; l1RlxMatched = -1;
+      isoTauPt = 0; isoTauEta = -99; isoTauPhi = -99; 
+      rlxTauPt = 0; rlxTauEta = -99; rlxTauPhi = -99;
+      
+      if(evt.getByToken(l1ExtraIsoTauSource_ , l1ExtraIsoTaus)){
+	for( vector<l1extra::L1JetParticle>::const_iterator isoTau = l1ExtraIsoTaus->begin();  isoTau != l1ExtraIsoTaus->end();  ++isoTau ) {
+	  double dR = deltaR( recoTau.p4(), isoTau->p4());
+	  //std::cout<<"Pt "<< isoTau->pt() << " Eta "<< isoTau->eta()<< " Phi "<< isoTau->phi()<< " DR "<< dR << endl;
+	  if( dR < deltaR_){
+	    
 	  //isoTauPt  = isoTau->gctJetCandRef()->rank();//isoTau->pt();
-	  isoTauPt  = isoTau->pt();
-	  isoTauEta = isoTau->eta();
-	  isoTauPhi = isoTau->phi();
-	  l1IsoMatched = 1;
-	  break;
+	    isoTauPt  = isoTau->pt();
+	    isoTauEta = isoTau->eta();
+	    isoTauPhi = isoTau->phi();
+	    l1IsoMatched = 1;
+	    break;
+	  }
 	}
       }
-    }
-    else
-      std::cout<<"ERROR GETTING L1EXTRA ISO TAUS"<<std::endl;
+      else
+	std::cout<<"ERROR GETTING L1EXTRA ISO TAUS"<<std::endl;
 
-    if(evt.getByLabel(l1ExtraTauSource_, l1ExtraTaus)){
-      for( vector<l1extra::L1JetParticle>::const_iterator rlxTau = l1ExtraTaus->begin(); rlxTau != l1ExtraTaus->end(); rlxTau++ ) {
-	double dR = deltaR( recoTau.p4(), rlxTau->p4());
+
+      if(evt.getByToken(l1ExtraTauSource_, l1ExtraTaus)){
+	for( vector<l1extra::L1JetParticle>::const_iterator rlxTau = l1ExtraTaus->begin(); rlxTau != l1ExtraTaus->end(); rlxTau++ ) {
+	  double dR = deltaR( recoTau.p4(), rlxTau->p4());
 	//std::cout<<"Pt "<< rlxTau->pt() << " Eta "<< rlxTau->eta()<< " Phi "<< rlxTau->phi()<< " DR "<< dR << endl;
-	if(dR < deltaR_){
-	  //isoTauPt  = rlxTau->gctJetCandRef()->rank();//isoTau->pt();
-	  rlxTauPt  = rlxTau->pt();
-	  rlxTauEta = rlxTau->eta();
-	  rlxTauPhi = rlxTau->phi();
-	  l1RlxMatched = 1;
-	  break;
+	  if(dR < deltaR_){
+	    //isoTauPt  = rlxTau->gctJetCandRef()->rank();//isoTau->pt();
+	    rlxTauPt  = rlxTau->pt();
+	    rlxTauEta = rlxTau->eta();
+	    rlxTauPhi = rlxTau->phi();
+	    l1RlxMatched = 1;
+	    break;
+	  }
 	}
       }
-    }
-    else
-      std::cout<<"ERROR GETTING L1EXTRA ISO TAUS"<<std::endl;
+      else
+	std::cout<<"ERROR GETTING L1EXTRA ISO TAUS"<<std::endl;
 
-    efficiencyTree->Fill();
+      efficiencyTree->Fill();
 
     }
 
@@ -342,13 +358,13 @@ void L1TNtuplizer::analyze( const Event& evt, const EventSetup& es )
  * nSignal Cands
  */
 void 
-L1TNtuplizer::getThreeProngInfo(const reco::PFTau & tau, double &maxDeltaR, double &minProngPt, double &midProngPt, double &maxProngPt, int &nCands){
+L1TNtuplizer::getThreeProngInfo(const pat::Tau & tau, double &maxDeltaR, double &minProngPt, double &midProngPt, double &maxProngPt, int &nCands){
   maxDeltaR = 0;
   minProngPt = tau.signalPFCands().at(0)->pt();
   midProngPt = tau.signalPFCands().at(0)->pt();
   maxProngPt = tau.signalPFCands().at(0)->pt();
   int i = 0;
-  for(i = 0; i < tau.signalPFCands().size(); i++){
+  for(i = 0; i < (int) tau.signalPFCands().size(); i++){
     double dR = deltaR( tau.p4(), tau.signalPFCands().at(i)->p4());
     double ptProng = tau.signalPFCands().at(i)->pt();
     if(dR>maxDeltaR)
@@ -366,8 +382,9 @@ L1TNtuplizer::getThreeProngInfo(const reco::PFTau & tau, double &maxDeltaR, doub
   nCands = i;
 }
 
+/*
 void
-L1TNtuplizer::getRawEcalHcalEnergy(const reco::PFCandidatePtr pfCand, double &rawEcal, double &rawHcal, double &ecal, double &hcal){
+L1TNtuplizer::getRawEcalHcalEnergy(const pat::PackedCandidate pfCand, double &rawEcal, double &rawHcal, double &ecal, double &hcal){
   //edm::Ptr<reco::PFCandidate> PFCand = tau.leadPFCand();
   //std::cout<<"Pt "<<pfCand->pt()<<std::endl;
   if(pfCand.isNonnull()){
@@ -376,20 +393,20 @@ L1TNtuplizer::getRawEcalHcalEnergy(const reco::PFCandidatePtr pfCand, double &ra
     ecal = pfCand->ecalEnergy();
     hcal = pfCand->hcalEnergy();
   }
-}
+  }*/
 
 //four vector addition vs linear sum
 double
-L1TNtuplizer::getPFCandsEt(const std::vector<reco::PFCandidatePtr> pfCands){
+L1TNtuplizer::getPFCandsEt(const std::vector<pat::PackedCandidate> pfCands){
   double etTotal = 0;
   for (uint32_t i = 0; i < pfCands.size(); i++ ) {
-    etTotal +=pfCands.at(i)->et();
+    etTotal +=pfCands.at(i).et();
   }
   return etTotal;
 }
 
 double
-L1TNtuplizer::getPFCandsEtEtaPhi(edm::Handle<std::vector<reco::PFCandidate> >& pfCands, const reco::PFTau & tau, double dR){
+L1TNtuplizer::getPFCandsEtEtaPhi(edm::Handle<std::vector<pat::PackedCandidate> >& pfCands, const pat::Tau & tau, double dR){
   double etTotal = 0;
   for (uint32_t i = 0; i < pfCands->size(); i++ ) {
     if(reco::deltaR(tau, pfCands->at(i)) < dR){
