@@ -56,14 +56,13 @@ process.source = cms.Source("PoolSource",
 process.options = cms.untracked.PSet()
 
 # Other statements
-#from Configuration.AlCa.GlobalTag import GlobalTag
-#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
-#process.GlobalTag.connect = cms.string('frontier://FrontierProd/CMS_COND_31X_GLOBALTAG')
-#process.GlobalTag.globaltag = cms.string('POSTLS162_V2::All')
-
+from Configuration.AlCa.GlobalTag import GlobalTag
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+process.GlobalTag.connect = cms.string('frontier://FrontierProd/CMS_COND_31X_GLOBALTAG')
+process.GlobalTag.globaltag = cms.string('POSTLS162_V2::All')
 
-process.GlobalTag.globaltag = 'GR_P_V56'
+#process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_condDBv2_cff')
+#process.GlobalTag.globaltag = 'GR_P_V56'
 
 
 #########################
